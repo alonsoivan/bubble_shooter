@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 public class ShootingBall extends Ball{
@@ -40,7 +41,7 @@ public class ShootingBall extends Ball{
         trazado.setRotation(rotation);
     }
 
-    // TODO SHOT MOVE BIEN
+    // TODO deltatime
     public void shot(Vector2 target){
         target = new Vector2(target.x, Gdx.graphics.getHeight() - target.y );
         direction =target.cpy().sub(new Vector2(super.getX()+ tam/2,super.getY() + tam/2));
@@ -52,9 +53,18 @@ public class ShootingBall extends Ball{
 
     public void move(){
         if(isShot){
+            System.out.println(direction);
             Vector2 pos = new Vector2(super.getX(),super.getY()).add(direction);
             super.setPosition(pos.x,pos.y);
         }
+    }
+
+    public void rebotar(){
+        if(direction.x <=0)
+            direction.x = Math.abs(direction.x);
+        else
+            direction.x = 0 - direction.x;
+
     }
 
     public Vector2 getTrazadoCenterPos(){

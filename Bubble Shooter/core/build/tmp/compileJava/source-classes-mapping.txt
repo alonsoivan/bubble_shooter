@@ -1,12 +1,12 @@
 com/ivn/bs/models/StaticBall.java
  com.ivn.bs.models.StaticBall
+com/ivn/bs/models/ShootingBall.java
+ com.ivn.bs.models.ShootingBall
+com/ivn/bs/screens/GameScreen.java
+ com.ivn.bs.screens.GameScreen
+ com.ivn.bs.screens.GameScreen$1
 com/ivn/bs/Aplication.java
  com.ivn.bs.Aplication
 com/ivn/bs/models/Ball.java
  com.ivn.bs.models.Ball
  com.ivn.bs.models.Ball$Color
-com/ivn/bs/screens/GameScreen.java
- com.ivn.bs.screens.GameScreen
- com.ivn.bs.screens.GameScreen$1
-com/ivn/bs/models/ShootingBall.java
- com.ivn.bs.models.ShootingBall

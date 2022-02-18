@@ -1,5 +1,6 @@
 package com.ivn.bs.models;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
@@ -13,6 +14,9 @@ public class StaticBall extends Ball{
     @Override
     public void draw(Batch batch) {
         super.draw(batch);
+    }
 
+    public boolean tocaTecho(){
+        return (getY() +  getTam()*1.1f  > Gdx.graphics.getHeight()) ;
     }
 }

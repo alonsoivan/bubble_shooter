@@ -97,11 +97,16 @@ public class GameScreen implements Screen {
                 generarShootingBall();
             }
         }
+
+        if(shootingBalls.get(0).getX() <= 0 || shootingBalls.get(0).getX()+shootingBalls.get(0).getTam() >= Gdx.graphics.getWidth() )
+            shootingBalls.get(0).rebotar();
     }
 
+    // cuando la shooting ball impacta la transformamos a staticball y comprobamos colores
     public void shootingToStaticBall(StaticBall staticBall){
         ShootingBall shootingBall = shootingBalls.get(0);
 
+        // miramos donce impacta para colocarla a iza o der
         float x = 0 ;
         if (shootingBall.getX() > staticBall.getX())
             x = staticBall.getX() + staticBall.getTam()/2;
@@ -112,36 +117,37 @@ public class GameScreen implements Screen {
 
         staticBalls.add(new StaticBall(shootingBall.getBallColor(),shootingBall.getPos(),shootingBall.getTam()));
 
+        // si ha dado a su color comprobamos y borramos
         comprobarColores(shootingBall.getBallColor(),shootingBall.getPos());
 
-
-        System.out.println("INDICES ENCONTRADOS: "+indicesAEliminar);
-
-        System.out.println("ultimo indice del array de bolas estaticas :"+ staticBalls.indexOf(staticBalls.peek(),false));
-
-        int[] arrayAux = new int[200];
         int tamIndicesAEliminar = indicesAEliminar.size();
 
+        // si se juntan 3 o mas borramos
         if(tamIndicesAEliminar >= 3){
+            int[] arrayAux = new int[200];
+
+            // copiamos los indices a un array normal
             System.out.println("VAMOS A BORRAR INDICES: "+indicesAEliminar);
             Iterator value = indicesAEliminar.iterator();
             int i = 0;
             while (value.hasNext()) {
                 arrayAux[i++] = (Integer) value.next();
             }
-        }
 
-        indicesAEliminar.clear();
-
-        Arrays.sort(arrayAux);
-
-        if(tamIndicesAEliminar >= 3){
-            for(int i = arrayAux.length -1  ; i > arrayAux.length -1 - tamIndicesAEliminar ; i--){
-                staticBalls.removeIndex(arrayAux[i]);
-                System.out.println("ultimo indice del array de bolas estaticas :"+ staticBalls.indexOf(staticBalls.peek(),false));
+            // procedemos al borrado
+            Arrays.sort(arrayAux);
+            if(tamIndicesAEliminar >= 3){
+                for(int j = arrayAux.length -1  ; j > arrayAux.length -1 - tamIndicesAEliminar ; j--){
+                    staticBalls.removeIndex(arrayAux[j]);
+                    System.out.println("ultimo indice del array de bolas estaticas :"+ staticBalls.indexOf(staticBalls.peek(),false));
+                }
             }
         }
+        indicesAEliminar.clear();
 
+
+        // comprobamos si se han quedado bolas huerfanas
+        comprobarSiHuerfanas();
     }
 
     public  HashSet<Integer> indicesAEliminar = new HashSet<Integer>();
